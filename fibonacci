@@ -1,0 +1,21 @@
+#include<stdio.h>
+int fibbo(int n)
+{int f1=0,f2=1,f3;
+printf("%d,%d,",f1,f2);
+for(int i=2;i<=n;i++)
+{
+f3=f1+f2;
+printf("%d,",f3);
+f1=f2;
+f2=f3;
+}
+return f3;
+}
+int main()
+{
+    int a;
+    printf("enter a number");
+    scanf("%d",&a);
+    fibbo(a);
+    return 0;
+}
