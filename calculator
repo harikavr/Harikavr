@@ -1,0 +1,45 @@
+#include<stdio.h>
+int compute( int a,int b,char c)
+{
+int result;
+switch(c)
+    {
+        case '+': 
+            result = a + b;
+            break;
+
+        case '-': 
+            result = a - b;
+            break;
+
+        case '*': 
+            result = a * b;
+            break;
+
+        case '/': 
+            result = a /b;
+           break;
+      default:
+          result=0;
+           break;
+    }
+return result;
+}
+ int print(int result)
+ {
+printf("the result is = %d",result);
+ }
+ int main()
+ {
+ int a,b;
+ char ch;
+ printf("Enter two numbers:");
+ scanf("%d%d",&a,&b);
+ printf("Enter an operator (+, -, *,/):");
+ scanf("%c",&ch);
+ int c=compute(a,b,ch);
+   print(c);
+   return 0;
+ }
+
+
