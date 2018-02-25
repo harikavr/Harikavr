@@ -1,0 +1,57 @@
+#include<stdio.h>
+int grades(int m)
+{int A,B,C,D,E,F,l;
+if(90<m&&m<=100)
+{l=m;}
+else
+if(80<m&&m<90)
+{l=m;}
+else
+if(70<m&&m<80)
+{l=m;}
+else
+if(60<m&&m<70)
+{l=m;}
+else
+if(50<m&&m<60)
+{l=m;}
+else
+if(m<=50)
+{l=m;
+}
+if(m>100)
+{l=m;
+}
+return l;
+}
+void print(int l)
+{if(90<l&&l<=100)
+{printf("the grade is A");
+}
+if(80<l&&l<=90)
+{printf("the grade is B");
+}
+if(70<l&&l<=80)
+{printf("the grade is C");
+}
+if(60<l&&l<=70)
+{printf("the grade is D");
+}
+if(50<l&&l<=60)
+{printf("the grade is E");
+}
+if(l<50)
+{printf("the grade is F");
+}if(l>100)
+{
+printf("invalid");
+}
+}
+int main()
+{int m;
+printf("enter the marks:");
+scanf("%d",&m);
+int c=grades(m);
+print(c);
+return 0;
+}
