@@ -10,7 +10,7 @@ int binary(int ar[],int size,int item)
         else if(item>ar[mid])
         beg=mid+1;
         else
-        last=mid=-1;
+        last=mid-1;
         
     }
     return -1;
