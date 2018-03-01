@@ -1,24 +1,30 @@
 #include<stdio.h>
-void matmul(int a[10][10],int b[10][10],int prod[10][10],int row,int column)
+void matmul(int a[10][10],int b[10][10],int prod[10][10],int m1,int n1,int m2,int n2)
 {
-for(int i=0;i<row;i++)
+for(int i=0;i<m1;++i)
 {
-for(int j=0;j<column;j++)
+for(int j=0;j<n2;++j)
 {
-    prod[i][j]=a[i][j]*b[i][j];
-}
-}}
-
-void print(int prod[10][10],int r,int c)
-{
-    printf("the sum of two matrices is:\n");
-    for(int i=0;i<r;i++)
+    prod[i][j]=0;
+    for(int c=0;c<n1;++c)
     {
-    for(int j=0;j<c;j++)
+        prod[i][j]=prod[i][j]+(a[i][j]*b[i][j]);
+    }
+}
+}
+    
+}
+
+void print(int prod[10][10],int m1,int n2)
+{   
+   
+    for(int i=0;i<m1;++i)
+    {printf("\n");
+    for(int j=0;j<n2;++j)
     {
         printf("%d ",prod[i][j]);
     }
-    printf("\n");
+    
     }
 }
 
@@ -27,24 +33,38 @@ void input(int a[10][10],int r,int c)
     for(int i=0;i<r;i++)
     {
     for(int j=0;j<c;j++)
-    {
+    {   print("%d,%d:",i,j);
         scanf("%d",&a[i][j]);
     }
     }
 }
 
-int main()
+void main()
 {
-int a[10][10],b[10][10],prod[10][10],m,n;
-printf("enter number of rows:");
-scanf("%d",&m);
-printf("enter number of columns:");
-scanf("%d",&n);
+int a[10][10],b[10][10],prod[10][10],m1,n1,m2,n2;
+printf("enter number of rows for matrix A:");
+scanf("%d",&m1);
+printf("enter number of columns for matrix A:");
+scanf("%d",&n1);
+printf("enter number of rows for matrix B:");
+scanf("%d",&m2);
+printf("enter number of columns for matrix B:");
+scanf("%d",&n2);
+if(n1==m2)
+{
 printf("Enter values of A:");
-input(a,m,n);
+input(a,m1,n1);
 printf("Enter values of B:");
-input(b,m,n);
-matmul(a,b,prod,m,n);
-print(prod,m,n);
-return 0;
+input(b,m2,n2);
+matmul(a,b,prod,m1,n1,m2,n2);
+printf("\n");
+print(prod,m1,n2);
 }
+else
+{
+    printf("matrices cannot be multiplied");
+}
+}
+
+
+
