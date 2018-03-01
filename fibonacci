@@ -1,21 +1,28 @@
 #include<stdio.h>
-int fibbo(int n)
-{int f1=0,f2=1,f3;
-printf("%d,%d,",f1,f2);
-for(int i=2;i<=n;i++)
+int fibbo(int f[10],int n)
 {
-f3=f1+f2;
-printf("%d,",f3);
-f1=f2;
-f2=f3;
-}
-return f3;
+    int f1=0,f2=1,f3;
+    f[0]=0,f[1]=1;
+    for(int i=2;i<=n;i++)
+    {
+    f3=f1+f2;
+    f[i]=f3;
+    f1=f2;
+    f2=f3;
+    }
+
 }
 int main()
 {
-    int a;
-    printf("enter a number");
-    scanf("%d",&a);
-    fibbo(a);
+    int a[100],n;
+    printf("enter a range:");
+    scanf("%d",&n);
+    fibbo(a,n);
+     for(int i=0;i<n;i++)
+    {
+        printf("%d ,"a[i]);
+    }
+   
     return 0;
 }
+
