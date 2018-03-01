@@ -1,0 +1,51 @@
+#include<stdio.h>
+int prime(int N)
+{ 
+    int p=0;
+    if(N==1)
+   {
+       p=1;
+   }
+    for(int i=2;i<N;i++)
+    {
+        if(N%i==0)
+        {
+            p=1;
+        }
+    }
+        if(N==2)
+        {p=0;
+        }
+        return p;
+    }
+
+void print(int p)
+{
+    scanf("%d",&p);
+    printf("the numbers:");
+}
+int main()
+{ 
+    int n,a[10];
+    printf("enter a limit:");
+    scanf("%d",&n);
+    int j=0;
+    for(int i=1;i<=n;i++)
+    {
+        int t=prime(i);
+        if(t==0)
+        {
+            a[j]=i;
+            j++;
+        }
+    }
+    printf("Prime numbers are:");
+    for(int i=0;i<j;i++)
+    {
+        printf("%d ",a[i]);
+    }
+
+}
+    
+
+
