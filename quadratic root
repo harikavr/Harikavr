@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<math.h>
+struct root
+{
+    float r1;
+    float r2;
+};
+int compute(float a,float b,float c,struct root *s1,struct root *s2)
+{
+    float d=(b*b)-(4*a*c);
+    if(d>0)
+    {
+        d=sqrt(d);
+        s1->r1=(-b+d)/(2*a);
+        s1->r2=0;
+        s2->r1=(-b-d)/(2*a);
+        s2->r2=0;
+    }
+    else if(d==0)
+    {
+        d=sqrt(d);
+        s1->r1=(-b)/(2*a);
+        s1->r2=0;
+        s2->r1=s1->r1;
+        s2->r2=0;
+    }
+    else if(d<0)
+    {
+        float n=(-2*d)+d;
+        s1->r1=(-b)/(2*a);
+        s2->r1=(-b)/(2*a);
+        n=sqrt(n);
+        s1->r2=n/(2*a);
+        s2->r2=(-n)/(2*a);
+    }
+}
+void print(struct root *s1)
+{
+    if ( s1->r2 < 0) {
+        printf("root1:%f-i%f\n",s1->r1,-(s1->r2));
+    }
+    else { 
+        printf("root2:%f+i(%f)\n",s2->r1,s2->r2);
+    }
+}
+void main()
+{
+    int a,b,c;
+    printf("enter a,b,c:");
+    
+    scanf("%d%d%d",&a,&b,&c);
+    struct root s1,s2;
+    compute(a,b,c,&s1,&s2);
+    print(&s1,&s2);
+}
