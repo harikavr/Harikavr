@@ -6,7 +6,7 @@ if (a>b&&a>c)
 {
   l=a;
 }
-else if (a>b&&a>c)
+else if (b>a&&b>c)
 {
   l=b;
 }
