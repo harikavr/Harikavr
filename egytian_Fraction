@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct sum_fraction
+{
+     int num;
+     int den;
+};
+struct egyptian_fraction
+{
+    int terms;
+    int d[100];
+    struct sum_fraction f;
+};
+struct instances
+{
+    int n;
+    struct egyptian_fraction eq[100];
+};
+
+struct instances input()
+{
+    struct instances nf;
+    printf("Enter number of equations:");
+    scanf("%d",&nf.n);
+    for(int i=0;i<nf.n;i++)
+    {
+        printf("Enter number of terms for equation %d:",i+1);
+        scanf("%d",&nf.eq[i].terms);
+        printf("Enter terms:");
+        for(int j=0;j<nf.eq[i].terms;j++)
+        {
+            scanf("%d",&nf.eq[i].d[j]);
+        }
+    }
+    return nf;
+}
+
+void find_sum_of_fraction(struct instances *nf, int i)
+{
+    int p=1,s=0;
+    for(int j=0;j<nf->eq[i].terms;j++)
+    {
+        p=p * nf->eq[i].d[j] ;
+
+    }
+    nf->eq[i].f.den=p;
+    
+    for(int k=0;k<nf->eq[i].terms;k++)
+    {
+        s=s + (p / nf->eq[i].d[k] );
+    }
+    nf->eq[i].f.num=s;
+        
+    int a;
+    if(nf->eq[i].f.den > nf->eq[i].f.num)
+        a= nf->eq[i].f.num ;
+    else
+        a= nf->eq[i].f.den ;
+
+    while((nf->eq[i].f.den >= a) && (nf->eq[i].f.num >= a)  && (a>0) )
+    {
+        if((nf->eq[i].f.den %a ==0) && (nf->eq[i].f.num %a ==0))
+        {
+            nf->eq[i].f.den =(nf->eq[i].f.den /a);
+            nf->eq[i].f.num =(nf->eq[i].f.num /a);
+        }
+        a--;
+    }
+}
+
+void convert_egyptian_fraction(struct instances *nf)
+{
+    for(int i=0;i<nf->n;i++)
+    {
+       find_sum_of_fraction(nf, i);
+    }
+}
+
+
+void output(struct instances nf)
+{
+
+    for(int i=0;i<nf.n;i++)
+    {
+        for(int j=0;j<nf.eq[i].terms;j++)
+        {
+            if(j==nf.eq[i].terms-1)
+                printf("1/%d =",nf.eq[i].d[j]);
+            else
+                printf("1/%d + ",nf.eq[i].d[j]);
+        }
+        printf("%d/%d\n",nf.eq[i].f.num, nf.eq[i].f.den);
+    }
+
+}
+void main()
+{
+    struct instances nf;
+    nf=input();
+    convert_egyptian_fraction(&nf);
+    output(nf);
+}
