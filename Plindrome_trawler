@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+
+struct position_palindrome
+{
+    int pos;
+    char pal[100];
+};
+struct string
+{
+    int length;
+    char string[100];
+    struct position_palindrome p[100];
+    int total_palindromes;               //number of palindromes present in the string
+};
+struct n_strings
+{
+    int n;
+    struct string s[100];
+};
+
+struct n_strings input()
+{
+    struct n_strings ns;
+    printf("Enter number of strings:");
+    scanf("%d",&ns.n);
+    for(int i=0;i<ns.n;i++)
+    {
+        printf("Enter length of string %d :",i+1);
+        scanf("%d",&ns.s[i].length);
+        printf("Enter string %d :",i+1);
+        scanf("%s",ns.s[i].string);
+        
+    }
+    return ns;
+}
+
+char* reverse(char str[], int len)
+{
+    char temp;
+    int i = 0;
+    int j = len - 1;
+ 
+   while (i < j)
+   {
+      temp = str[i];
+      str[i] = str[j];
+      str[j] = temp;
+      i++;
+      j--;
+   }
+    return str;
+}
+
+void palindrome(struct n_strings *ns,int i)
+{
+    int t=0;
+    for(int a=0;a<=(ns->s[i].length - 3);a++)
+    {
+        int end_index=a+3;
+        while(end_index <= ns->s[i].length)
+        {
+            char ch[end_index -a],ch1[end_index -a];
+            strncpy(ch, (ns->s[i].string+a ),(end_index - a));
+            strcpy(ch1,ch);
+            char *ch2= reverse( ch,(end_index - a)) ;
+            if(strcmp(ch2 ,ch1) == 0)
+            {
+                ns->s[i].p[t].pos=a;
+                strcpy(ns->s[i].p[t].pal, ch2);
+                t++;
+            }
+            end_index++;
+        }
+    }
+    ns->s[i].total_palindromes=t;
+}
+
+void palindrome_trawler(struct n_strings *ns)
+{
+    for(int i=0;i<ns->n;i++)
+    {
+        palindrome(ns,i);
+    }
+}
+
+void output(struct n_strings ns)
+{
+    for(int i=0;i<ns.n;i++)
+    {
+        printf("%s\n",ns.s[i].string);
+        for(int j=0;j< ns.s[i].total_palindromes ;j++)
+        {
+           printf("%d %s\n",ns.s[i].p[j].pos+1,ns.s[i].p[j].pal);
+        }
+    }
+}
+
+void main()
+{
+    struct n_strings ns;
+    ns=input();
+    palindrome_trawler(&ns);
+    output(ns);
+}
